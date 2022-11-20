@@ -9,11 +9,11 @@ namespace MyToDo.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class ToDoController : Controller
+    public class MemoController : Controller
     {
-        private readonly IToDoService service;
+        private readonly IMemoService service;
 
-        public ToDoController(IToDoService service)
+        public MemoController(IMemoService service)
         {
             this.service = service;
         }
@@ -22,9 +22,9 @@ namespace MyToDo.Api.Controllers
         [HttpGet]
         public async Task<ApiResponse> GetAll([FromQuery] QueryParameter parameter) => await service.GetAllAsync(parameter);
         [HttpPost]
-        public async Task<ApiResponse> Update([FromBody] ToDoDto model) => await service.UpdateAsync(model);
+        public async Task<ApiResponse> Update([FromBody] MemoDto model) => await service.UpdateAsync(model);
         [HttpPost]
-        public async Task<ApiResponse> Add([FromBody] ToDoDto model) => await service.AddAsync(model);
+        public async Task<ApiResponse> Add([FromBody] MemoDto model) => await service.AddAsync(model);
         [HttpDelete]
         public async Task<ApiResponse> Delete(int id) => await service.DeleteAsync(id);
     }
