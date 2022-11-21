@@ -25,6 +25,7 @@ builder.Services.AddDbContext<MyToDoContext>(x => x.UseSqlite(builder.Configurat
 
 builder.Services.AddTransient<IToDoService,ToDoService>();
 builder.Services.AddTransient<IMemoService, MemoService>();
+builder.Services.AddTransient<ILoginService, LoginService>();
 
 var autoMapperConfig = new MapperConfiguration(config => { config.AddProfile(new AutoMapperProfile()); });
 
