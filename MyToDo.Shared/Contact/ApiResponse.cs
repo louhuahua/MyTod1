@@ -1,4 +1,4 @@
-﻿namespace MyToDo.Api.Service
+﻿namespace MyToDo.Shared.Contact
 {
     public class ApiResponse
     {
