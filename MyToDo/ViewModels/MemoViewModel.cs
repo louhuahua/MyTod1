@@ -1,5 +1,7 @@
 ﻿using MyToDo.Common.Models;
+using MyToDo.Service;
 using MyToDo.Shared.Dtos;
+using MyToDo.Shared.Parameters;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -13,12 +15,14 @@ namespace MyToDo.ViewModels
 {
     public class MemoViewModel:BindableBase
     {
-        public MemoViewModel()
+        public MemoViewModel(IMemoService service)
         {
             MemoDtos = new ObservableCollection<MemoDto>();
-            CreateTestData();
             AddCommand = new DelegateCommand(Add);
             OpenRightDrawer = new DelegateCommand(Open);
+            this.service = service;
+            CreateTestData();
+
         }
 
         private void Open()
@@ -42,6 +46,7 @@ namespace MyToDo.ViewModels
         }
 
         private ObservableCollection<MemoDto> memoDtos;
+        private readonly IMemoService service;
 
         public ObservableCollection<MemoDto> MemoDtos
         {
@@ -49,13 +54,16 @@ namespace MyToDo.ViewModels
             set { memoDtos = value; RaisePropertyChanged(); }
         }
 
-        void CreateTestData()
+        async void CreateTestData()
         {
-            MemoDtos = new ObservableCollection<MemoDto>();
-
-            for (int i = 0; i < 20; i++)
+            MemoDtos.Clear();
+            var result = await service.GetAllAsync(new QueryParameter() { PageIndex = 0, PageSize = 100 });
+            if (result.Status)
             {
-                MemoDtos.Add(new MemoDto() { Id = i, Title = "备忘录" + i, Content = "Content" + i });
+                foreach (var item in result.Result.Items)
+                {
+                    MemoDtos.Add(item);
+                }
             }
         }
     }
