@@ -32,6 +32,7 @@ namespace MyToDo
             containerRegistry.GetContainer().Register<IToDoService,ToDoService>(); 
             containerRegistry.GetContainer().Register<IMemoService,MemoService>(); 
 
+            containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SkinView, SkinViewModel>();
             containerRegistry.RegisterForNavigation<AboutView, AboutViewModel>();
             containerRegistry.RegisterForNavigation<IndexView, IndexViewModel>();

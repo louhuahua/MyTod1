@@ -69,6 +69,7 @@ namespace MyToDo.ViewModels
             MenuBars.Add(new MenuBar() {Icon="Note",Title="待办事项",NameSpace="ToDoView" });
             MenuBars.Add(new MenuBar() {Icon="NoteAlert",Title="备忘录",NameSpace="MemoView" });
             MenuBars.Add(new MenuBar() {Icon="CogBox",Title="设置",NameSpace="SettingsView" });
+            MenuBars.Add(new MenuBar() {Icon="Home",Title="主窗口",NameSpace="MainView" });
         }
     }
 }
